@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"  content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>国际影城</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <div class="container">
+         <header class="header">
+
+             <div class="title">
+                 <div class="center-area">国际影城</div>
+             </div>
+             <div class="left-area">影城</div>
+             <div class="right-area"><span>!</span></div>
+             <p class="title-info">影院重装开业，会员卡可享受5折优惠</p>
+        </header>
+        <nav class="nav swiper-container">
+            <!--<ul class="swiper-wrapper item-lists">
+                <li class="swiper-slide m-item"><img src="img/img_03.png" alt=""></li>
+                <li class="swiper-slide m-item"><img src="img/img_05.png" alt=""></li>
+                <li class="swiper-slide m-item"><img src="img/img_07.png" alt=""></li>
+                <li class="swiper-slide m-item"><img src="img/img_03.png" alt=""></li>
+                <li class="swiper-slide m-item"><img src="img/img_05.png" alt=""></li>
+                <li class="swiper-slide m-item"><img src="img/img_07.png" alt=""></li>
+            </ul>-->
+        </nav>
+        <!--用于存放模板原生语法-->
+     <!-- <textarea name="" id="mtpl" style="display:none">
+          <% for(var i=0;i<list.length;i++){　%>
+            <% if(i==0){ %>
+             <article>
+                <div class="info">
+                    <p><span class="movie-name"><%= list[i].movie_name %></span><span>片长：93分钟</span><span class="movie-range">8.7分</span></p>
+                    <p><%= list[i].movie_desc %></p>
+                </div>
+                <div class="remind">
+                    <p>中午12点前，会员统一价25元，限购2张 <span class="right-arrow"></span></p>
+                </div>
+                <div class="time-lists">
+                    <div class="swiper-container movie-date">
+                        <ul class="swiper-wrapper">
+                            <% for( var j in list[i].shows){ %>
+                             <li class="active swiper-slide"><%= j %></li>
+                            <% } %>
+                        </ul>
+                    </div>
+                </div>
+                <div class="info-table">
+                    <p class="movie-tips"><span>!</span>温馨提示：电影开场前30分钟关闭在线售票</p>
+                   <div class="info-list">
+                        <table>
+                            <% for(var k in list[i].shows[j]){ %>
+                            <tr>
+                                <td>
+                                    <p class="dark"><%=list[i].shows[j][k].start_time%></p>
+                                    <p><%=list[i].shows[j][k].end_time %>散场</p>
+                                </td>
+                                <td>
+                                    <p class="dark"><%=list[i].shows[j][k].language %></p>
+                                    <p><%=list[i].shows[j][k].hall_name %></p>
+                                </td>
+                                <td>
+                                    <p class="price">￥<%=list[i].shows[j][k].market_price %></p>
+                                    <p class="member">
+                                        <em class="mark">会员</em>
+                                        <em class="mark2">￥<%=list[i].shows[j][k].member_price %></em>
+                                    </p>
+                                    <p>影院价 ￥<%=list[i].shows[j][k].price %></p>
+                                </td>
+                                <td>
+                                    <% if(list[i].shows[j][k].is_all_sold==0){ %>
+                                     <span class="order onsale">选座购票</span>
+                                    <% }else{ %>
+                                      <span class="order offsale">场次过期</span>
+                                    <% } %>
+                                </td>
+                            </tr>
+                            <% } %>
+                        </table>
+                    </div>
+                </div>
+            </article>
+            <% }else{ %>
+
+            <%　}　%>
+          <%　}　%>
+          </textarea>-->
+
+        <!--用简洁语法写-->
+        <textarea name="" id="mtpl" cols="30" rows="10" style="display: none">
+            {{each list}}
+            {{if $index==0}}
+             <article class="info-area">
+             {{else}}
+             <article class="info-area">
+             {{/if}}
+                <div class="info">
+                    <p><span class="movie-name">{{$value.movie_name}}</span><span>片长：93分钟</span><span class="movie-range">8.7分</span></p>
+                    <p>{{$value.movie_desc}}</p>
+                </div>
+                <div class="remind">
+                    <p>中午12点前，会员统一价25元，限购2张 <span class="right-arrow"></span></p>
+                </div>
+                <div class="time-lists">
+                    <div class="swiper-container movie-date">
+                        <ul class="swiper-wrapper">
+                            {{each $value.days as v i}}
+                            <!--每张图片对应的第一个日期始终是高亮显示-->
+                            {{if i!==0}}
+                            <li class="swiper-slide">{{v.show_date}}</li>
+                            {{else}}
+                            <li class="self-active swiper-slide">{{v.show_date}}</li>
+                            {{/if}}
+                            {{/each}}
+                        </ul>
+                    </div>
+                </div>
+                <div class="info-table">
+                    <p class="movie-tips"><span>!</span>温馨提示：电影开场前30分钟关闭在线售票</p>
+                    <div class="info-list">
+                        {{each $value.shows}}
+                        <table class="{{$index}}">
+                            {{each $value as content index}}
+                            <tr>
+                                <td>
+                                    <p class="dark">{{content.start_time}}</p>
+                                    <p>{{content.end_time}}散场</p>
+                                </td>
+                                <td>
+                                    <p class="dark">{{content.language}}</p>
+                                    <p>{{content.hall_name}}</p>
+                                </td>
+                                <td>
+                                    <p class="price">￥{{content.market_price}}</p>
+                                    <p class="member">
+                                        <em class="mark">会员</em>
+                                        <em class="mark2">￥{{content.member_price}}</em>
+                                    </p>
+                                    <p>影院价 ￥{{content.price}}</p>
+                                </td>
+                                <td>
+                                    {{if content.is_all_sold==0}}
+                                      <span class="order onsale">选座购票</span>
+                                    {{else}}
+                                      <span class="order offsale">场次过期</span>
+                                    {{/if}}
+                                </td>
+                            </tr>
+                            {{/each}}
+                        </table>
+                        {{/each}}
+                    </div>
+                </div>
+        </article>
+        {{/each}}
+        </textarea>
+        <div class="all-lists">
+           <!-- <article class="hide">
+                <div class="info">
+                    <p><span class="movie-name">美人鱼</span><span>片长：93分钟</span><span class="movie-range">8.7分</span></p>
+                    <p>人鱼喜相恋，一起保家园</p>
+                </div>
+                <div class="remind">
+                    <p>中午12点前，会员统一价25元，限购2张 <span class="right-arrow"></span></p>
+                </div>
+                <div class="time-lists">
+                    <div class="swiper-container movie-date">
+                        <ul class="swiper-wrapper">
+                            <li class="active swiper-slide">11月3号</li>
+                            <li class="swiper-slide">11月3号</li>
+                            <li class="swiper-slide">11月3号</li>
+                            <li class="swiper-slide">11月3号</li>
+                            <li class="swiper-slide">11月3号</li>
+                            <li class="swiper-slide">11月3号</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="info-table">
+                    <p class="movie-tips"><em>!</em>温馨提示：电影开场前30分钟关闭在线售票</p>
+                   <div class="info-list">
+                        <table>
+                            <tr>
+                                <td>
+                                    <p class="dark">08:15</p>
+                                    <p>10:26散场</p>
+                                </td>
+                                <td>
+                                    <p class="dark">国语/数字</p>
+                                    <p>5号厅</p>
+                                </td>
+                                <td>
+                                    <p class="price">￥64</p>
+                                    <p class="member">
+                                        <em class="mark">会员</em>
+                                        <em class="mark2">￥19.9</em>
+                                    </p>
+                                    <p>影院价 ￥120</p>
+                                </td>
+                                <td>
+                                    <span class="order">选座购票</span>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </article>-->
+        </div>
+
+    </div>
+    <script src="lib/require.2.1.15.min.js" data-main="js/main"></script>
+</body>
+</html>

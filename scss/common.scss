@@ -1,0 +1,99 @@
+html,body{
+  width: 100%;
+  height: 100%;
+}
+
+%center{
+  text-align: center;
+}
+
+%fle{
+  float:left;
+}
+
+$baseColor:#d80a1e;
+%clearfix{
+  &:before,
+  &:after{
+    display: block;
+    content:"";
+    height: 0;
+  }
+  &:after{
+    clear:both;
+  }
+}
+.hide{
+  display:none;
+}
+
+@mixin rightArrow($color:#ffe1e1,$bgColor:$baseColor){
+  position: relative;
+  &:after{
+    content:'';
+    width: 0;
+    height: 0;
+    border: 7px solid transparent;
+    border-left-color:$bgColor;
+    position: absolute;
+    right:0;
+    top:50%;
+    margin-top:-6px;
+  }
+  &:before{
+    content:'';
+    width: 0;
+    height: 0;
+    border: 7px solid transparent;
+    border-left-color:$color;
+    position: absolute;
+    right:-1px;
+    top:50%;
+    margin-top:-6px;
+  }
+}
+
+
+/*@mixin downArrow($color:#fff,$bgColor:$baseColor){
+  &:after{
+    content:'';
+    position: absolute;
+    top:50%;
+    right:0px;
+    border:12px solid transparent;
+    border-top-color:$bgColor;
+    margin-top:-5px;
+  }
+  &:before{
+    content:'';
+    position: absolute;
+    top:50%;
+    right: 0px;
+    border:12px solid transparent;
+    border-top-color:$color;
+    margin-top:-2px;
+  }
+}*/
+
+
+@mixin downArrow($bWidth: 1px,$color:#fff,$bgColor:$baseColor){
+  position: relative;
+  &:after{
+    content: '';
+    position: absolute;
+    border: 7px solid transparent;
+    border-top-color: $bgColor;
+    top: 50%;
+    margin: -6px 0 0 0;
+    right: 0;
+  }
+  &:before{
+    content: '';
+    position: absolute;
+    border: 7px solid transparent;
+    border-top-color: $color;
+    top: 50%;
+    margin: -5px 0 0 0;
+    right: 0;
+  }
+}

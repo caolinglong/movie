@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>箭头</title>
+	<style>
+		 .triangle{
+			width: 100px;
+			height: 100px;
+			background: #ccc;
+			position: relative;
+			overflow: hidden;
+		} 
+		 .triangle:before{
+			content:"";
+			width: 0;
+			height: 0;
+			border: 50px solid transparent;
+			border-right-color:red;
+			border-right-width:30px;
+			position: absolute;
+			right: 0;
+			top: 0; 
+			
+		} 
+		.triangle:after{
+			content: "";
+			width: 0;
+			height: 0;
+			border: 50px solid transparent;
+			border-right-color:#ccc;
+			border-right-width:30px;
+			position: absolute;
+			right: -5px;
+			top: 0; 
+		}
+	</style>	
+</head>
+<body>
+	<div class="triangle">
+	</div>
+	
+</body>
+</html>
